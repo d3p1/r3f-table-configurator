@@ -1,0 +1,12 @@
+/**
+ * @description Styles
+ * @author      C. M. de Picciotto <d3p1@d3p1.dev> (https://d3p1.dev/)
+ */
+@import "tailwindcss";
+
+@theme {
+    --color-primary-900: hsl(0, 0%, 0%);
+    --color-primary-500: hsl(0, 0%, 50%);
+    --color-secondary: hsl(0, 0%, 100%);
+    --color-accent-primary: hsl(180, 100%, 60%);
+}
