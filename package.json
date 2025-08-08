@@ -1,6 +1,6 @@
 {
   "name": "@d3p1/r3f-table-configurator",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A table configurator to improve my R3F skills",
   "private": true,
   "type": "module",
