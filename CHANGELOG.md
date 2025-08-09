@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/d3p1/r3f-table-configurator/compare/v1.0.0...v1.1.0) (2025-08-09)
+
+
+### Features
+
+* add table model [[#1](https://github.com/d3p1/r3f-table-configurator/issues/1)] ([e86e575](https://github.com/d3p1/r3f-table-configurator/commit/e86e5752adc830b5dc942fc0d2ff2f39062ded07))
+
 # 1.0.0 (2025-08-08)
 
 
