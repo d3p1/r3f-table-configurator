@@ -5,8 +5,7 @@
 @import "tailwindcss";
 
 @theme {
-    --color-primary-900: hsl(0, 0%, 0%);
-    --color-primary-500: hsl(0, 0%, 50%);
-    --color-secondary: hsl(0, 0%, 100%);
+    --color-primary-900: hsl(0, 0%, 100%);
+    --color-secondary: hsl(0, 0%, 0%);
     --color-accent-primary: hsl(180, 100%, 60%);
 }

@@ -5,27 +5,12 @@
  * @note        Command: `npx gltfjsx@6.5.3 -t public/model/table.gltf`
  */
 import * as React from 'react'
-import * as THREE from 'three'
 import {useGLTF} from '@react-three/drei'
-import {type GLTF} from 'three-stdlib'
+import {type GLTFResult, TABLE_MODEL_TYPE} from '../../types'
 
-type GLTFResult = GLTF & {
-  nodes: {
-    Plate: THREE.Mesh
-    Legs01Left: THREE.Mesh
-    Legs01Right: THREE.Mesh
-    Legs02Left: THREE.Mesh
-    Legs02Right: THREE.Mesh
-    Legs03Left: THREE.Mesh
-    Legs03Right: THREE.Mesh
-  }
-  materials: {
-    Plate: THREE.MeshStandardMaterial
-    Metal: THREE.MeshStandardMaterial
-  }
-}
-
-export const Table = (props: React.JSX.IntrinsicElements['group']) => {
+export const Table: React.FC<
+  React.JSX.IntrinsicElements['group'] & {modelType: TABLE_MODEL_TYPE}
+> = ({modelType = TABLE_MODEL_TYPE.CLASSIC, ...props}) => {
   const {nodes, materials} = useGLTF(
     '/r3f-table-configurator/model/table.gltf',
   ) as unknown as GLTFResult
@@ -36,42 +21,57 @@ export const Table = (props: React.JSX.IntrinsicElements['group']) => {
         geometry={nodes.Plate.geometry}
         material={materials.Plate}
       />
-      <mesh
-        castShadow={true}
-        geometry={nodes.Legs01Left.geometry}
-        material={materials.Metal}
-        position={[-1.5, 0, 0]}
-      />
-      <mesh
-        castShadow={true}
-        geometry={nodes.Legs01Right.geometry}
-        material={materials.Metal}
-        position={[1.5, 0, 0]}
-      />
-      <mesh
-        castShadow={true}
-        geometry={nodes.Legs02Left.geometry}
-        material={materials.Metal}
-        position={[-1.5, 0, 0]}
-      />
-      <mesh
-        castShadow={true}
-        geometry={nodes.Legs02Right.geometry}
-        material={materials.Metal}
-        position={[1.5, 0, 0]}
-      />
-      <mesh
-        castShadow={true}
-        geometry={nodes.Legs03Left.geometry}
-        material={materials.Metal}
-        position={[-1.5, 0, 0]}
-      />
-      <mesh
-        castShadow={true}
-        geometry={nodes.Legs03Right.geometry}
-        material={materials.Metal}
-        position={[1.5, 0, 0]}
-      />
+
+      {modelType === TABLE_MODEL_TYPE.CLASSIC && (
+        <>
+          <mesh
+            castShadow={true}
+            geometry={nodes.Legs01Left.geometry}
+            material={materials.Metal}
+            position={[-1.5, 0, 0]}
+          />
+          <mesh
+            castShadow={true}
+            geometry={nodes.Legs01Right.geometry}
+            material={materials.Metal}
+            position={[1.5, 0, 0]}
+          />
+        </>
+      )}
+
+      {modelType === TABLE_MODEL_TYPE.MODERN && (
+        <>
+          <mesh
+            castShadow={true}
+            geometry={nodes.Legs02Left.geometry}
+            material={materials.Metal}
+            position={[-1.5, 0, 0]}
+          />
+          <mesh
+            castShadow={true}
+            geometry={nodes.Legs02Right.geometry}
+            material={materials.Metal}
+            position={[1.5, 0, 0]}
+          />
+        </>
+      )}
+
+      {modelType === TABLE_MODEL_TYPE.MINIMALISTIC && (
+        <>
+          <mesh
+            castShadow={true}
+            geometry={nodes.Legs03Left.geometry}
+            material={materials.Metal}
+            position={[-1.5, 0, 0]}
+          />
+          <mesh
+            castShadow={true}
+            geometry={nodes.Legs03Right.geometry}
+            material={materials.Metal}
+            position={[1.5, 0, 0]}
+          />
+        </>
+      )}
     </group>
   )
 }
