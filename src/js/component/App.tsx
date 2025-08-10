@@ -5,6 +5,7 @@
 import {OrbitControls} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
 import {Suspense} from 'react'
+import {TABLE_MODEL_TYPE} from '../types'
 import {Table} from './app/Table.tsx'
 
 export const App = () => {
@@ -26,7 +27,7 @@ export const App = () => {
         </mesh>
 
         <Suspense>
-          <Table />
+          <Table modelType={TABLE_MODEL_TYPE.MODERN} />
         </Suspense>
       </Canvas>
 
