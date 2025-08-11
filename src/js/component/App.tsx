@@ -4,11 +4,15 @@
  */
 import {OrbitControls} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
-import {Suspense} from 'react'
-import {TABLE_MODEL_TYPE} from '../types'
+import {Suspense, useState} from 'react'
+import {TABLE_MODEL_TYPE, type TableModel} from '../types'
 import {Table} from './app/Table.tsx'
 
 export const App = () => {
+  const [tableModelType, setTableModelType] = useState<TableModel>(
+    TABLE_MODEL_TYPE.CLASSIC.value,
+  )
+
   return (
     <>
       <Canvas camera={{position: [2, 3, 4]}} shadows={true}>
@@ -27,17 +31,48 @@ export const App = () => {
         </mesh>
 
         <Suspense>
-          <Table modelType={TABLE_MODEL_TYPE.MODERN} />
+          <Table modelType={tableModelType} />
         </Suspense>
       </Canvas>
 
-      <div className="fixed right-10 top-10 flex flex-col justify-center items-center p-8 rounded-2xl shadow-[black_0_0_1rem] opacity-50 hover:opacity-100 transition-opacity duration-500">
+      <div className="fixed right-10 top-10 flex flex-col gap-4 p-8 text-sm rounded-2xl shadow-[black_0_0_1rem] opacity-50 hover:opacity-100 transition-opacity duration-500">
         <div>
-          <h3>Model</h3>
-        </div>
+          <h3 className="font-black uppercase mb-3">Model</h3>
 
-        <div>
-          <h3>Color</h3>
+          <ul className="flex flex-col gap-3">
+            {Object.keys(TABLE_MODEL_TYPE).map((key) => {
+              return (
+                <li key={key} className="flex flex-row gap-2 text-xs">
+                  <input
+                    type="radio"
+                    name="table_model_type"
+                    id={`table_model_${key}`}
+                    value={
+                      TABLE_MODEL_TYPE[key as keyof typeof TABLE_MODEL_TYPE]
+                        .value
+                    }
+                    checked={
+                      tableModelType ===
+                      TABLE_MODEL_TYPE[key as keyof typeof TABLE_MODEL_TYPE]
+                        .value
+                    }
+                    onChange={() =>
+                      setTableModelType(
+                        TABLE_MODEL_TYPE[key as keyof typeof TABLE_MODEL_TYPE]
+                          .value,
+                      )
+                    }
+                  />
+                  <label htmlFor={`table_model_${key}`}>
+                    {
+                      TABLE_MODEL_TYPE[key as keyof typeof TABLE_MODEL_TYPE]
+                        .label
+                    }
+                  </label>
+                </li>
+              )
+            })}
+          </ul>
         </div>
       </div>
     </>

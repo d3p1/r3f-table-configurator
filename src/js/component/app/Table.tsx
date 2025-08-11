@@ -6,11 +6,13 @@
  */
 import * as React from 'react'
 import {useGLTF} from '@react-three/drei'
-import {type GLTFResult, TABLE_MODEL_TYPE} from '../../types'
+import {type GLTFResult, type TableModel, TABLE_MODEL_TYPE} from '../../types'
 
 export const Table: React.FC<
-  React.JSX.IntrinsicElements['group'] & {modelType: TABLE_MODEL_TYPE}
-> = ({modelType = TABLE_MODEL_TYPE.CLASSIC, ...props}) => {
+  React.JSX.IntrinsicElements['group'] & {
+    modelType: TableModel
+  }
+> = ({modelType = TABLE_MODEL_TYPE.CLASSIC.value, ...props}) => {
   const {nodes, materials} = useGLTF(
     '/r3f-table-configurator/model/table.gltf',
   ) as unknown as GLTFResult
@@ -22,7 +24,7 @@ export const Table: React.FC<
         material={materials.Plate}
       />
 
-      {modelType === TABLE_MODEL_TYPE.CLASSIC && (
+      {modelType === TABLE_MODEL_TYPE.CLASSIC.value && (
         <>
           <mesh
             castShadow={true}
@@ -39,7 +41,7 @@ export const Table: React.FC<
         </>
       )}
 
-      {modelType === TABLE_MODEL_TYPE.MODERN && (
+      {modelType === TABLE_MODEL_TYPE.MODERN.value && (
         <>
           <mesh
             castShadow={true}
@@ -56,7 +58,7 @@ export const Table: React.FC<
         </>
       )}
 
-      {modelType === TABLE_MODEL_TYPE.MINIMALISTIC && (
+      {modelType === TABLE_MODEL_TYPE.MINIMALISTIC.value && (
         <>
           <mesh
             castShadow={true}

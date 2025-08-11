@@ -21,8 +21,20 @@ export type GLTFResult = GLTF & {
   }
 }
 
-export enum TABLE_MODEL_TYPE {
-  CLASSIC,
-  MODERN,
-  MINIMALISTIC,
-}
+export const TABLE_MODEL_TYPE = {
+  CLASSIC: {
+    label: 'Classic',
+    value: 'classic',
+  },
+  MODERN: {
+    label: 'Modern',
+    value: 'modern',
+  },
+  MINIMALISTIC: {
+    label: 'Minimalistic',
+    value: 'minimalistic',
+  },
+} as const
+
+export type TableModel =
+  (typeof TABLE_MODEL_TYPE)[keyof typeof TABLE_MODEL_TYPE]['value']
