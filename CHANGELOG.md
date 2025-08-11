@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/d3p1/r3f-table-configurator/compare/v1.2.0...v1.3.0) (2025-08-11)
+
+
+### Features
+
+* switch table model using menu [[#1](https://github.com/d3p1/r3f-table-configurator/issues/1)] ([616a812](https://github.com/d3p1/r3f-table-configurator/commit/616a812ca2b464af471587908e46633c4a725c39))
+
 # [1.2.0](https://github.com/d3p1/r3f-table-configurator/compare/v1.1.0...v1.2.0) (2025-08-10)
 
 
