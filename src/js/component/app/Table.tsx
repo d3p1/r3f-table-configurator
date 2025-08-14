@@ -5,17 +5,31 @@
  * @note        Command: `npx gltfjsx@6.5.3 -t public/model/table.gltf`
  */
 import * as React from 'react'
+import {useEffect, useRef} from 'react'
 import {useGLTF} from '@react-three/drei'
-import {type GLTFResult, type TableModel, TABLE_MODEL_TYPE} from '../../types'
+import {
+  type GLTFResult,
+  type TableModelType,
+  TABLE_MODEL_TYPE,
+  type TableModelColor,
+} from '../../types'
 
-export const Table: React.FC<
-  React.JSX.IntrinsicElements['group'] & {
-    modelType: TableModel
-  }
-> = ({modelType = TABLE_MODEL_TYPE.CLASSIC.value, ...props}) => {
+type Props = React.JSX.IntrinsicElements['group'] & {
+  modelType: TableModelType
+  modelColor: TableModelColor
+}
+
+export const Table: React.FC<Props> = ({modelType, modelColor, ...props}) => {
   const {nodes, materials} = useGLTF(
     '/r3f-table-configurator/model/table.gltf',
   ) as unknown as GLTFResult
+
+  const metalMaterialRef = useRef(materials.Metal)
+
+  useEffect(() => {
+    metalMaterialRef.current.color.set(modelColor)
+  }, [modelColor])
+
   return (
     <group {...props} dispose={null}>
       <mesh

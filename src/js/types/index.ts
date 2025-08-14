@@ -36,5 +36,27 @@ export const TABLE_MODEL_TYPE = {
   },
 } as const
 
-export type TableModel =
+export const TABLE_MODEL_COLOR = {
+  GOLD: {
+    label: 'Gold',
+    value: 'gold',
+  },
+  SILVER: {
+    label: 'Silver',
+    value: 'silver',
+  },
+  BRONZE: {
+    label: 'Bronze',
+    value: 'darkorange',
+  },
+  BLACK: {
+    label: 'Black',
+    value: 'black',
+  },
+} as const
+
+export type TableModelType =
   (typeof TABLE_MODEL_TYPE)[keyof typeof TABLE_MODEL_TYPE]['value']
+
+export type TableModelColor =
+  (typeof TABLE_MODEL_COLOR)[keyof typeof TABLE_MODEL_COLOR]['value']
