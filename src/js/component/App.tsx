@@ -2,15 +2,20 @@
  * @description App
  * @author      C. M. de Picciotto <d3p1@d3p1.dev> (https://d3p1.dev/)
  */
-import {OrbitControls} from '@react-three/drei'
+import {
+  AccumulativeShadows,
+  OrbitControls,
+  RandomizedLight,
+} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
-import {Suspense, useState} from 'react'
+import {useState} from 'react'
 import {
   TABLE_MODEL_COLOR,
   TABLE_MODEL_TYPE,
   type TableModelColor,
   type TableModelType,
 } from '../types'
+import {Env} from './app/Env.tsx'
 import {Menu} from './app/Menu.tsx'
 import {Table} from './app/Table.tsx'
 
@@ -19,20 +24,27 @@ export const App = () => {
     TABLE_MODEL_TYPE.CLASSIC.value,
   )
   const [tableModelColor, setTableModelColor] = useState<TableModelColor>(
-    TABLE_MODEL_COLOR.GOLD.value,
+    TABLE_MODEL_COLOR.BLACK.value,
   )
 
   return (
     <>
-      <Canvas camera={{position: [2, 1, 4]}}>
+      <Canvas camera={{position: [2, 1, 4]}} shadows={true}>
+        <Env />
+
         <OrbitControls maxPolarAngle={Math.PI / 2} minPolarAngle={0} />
 
-        <ambientLight intensity={2} />
-        <directionalLight position={[2, 1, 4]} intensity={4.5} />
+        <AccumulativeShadows
+          temporal={true}
+          frames={100}
+          color="#000000"
+          opacity={0.4}
+          position={[0, -1, 0]}
+        >
+          <RandomizedLight radius={3} position={[2, 10, 4]} />
+        </AccumulativeShadows>
 
-        <Suspense>
-          <Table modelType={tableModelType} modelColor={tableModelColor} />
-        </Suspense>
+        <Table modelType={tableModelType} modelColor={tableModelColor} />
       </Canvas>
 
       <Menu
