@@ -15,6 +15,7 @@ const BASE_RIGHT_LEG_POSITION = new THREE.Vector3(
   0,
   0,
 )
+const ANIMATION_SPEED = 0.15
 
 export const useTableModelSize = ({
   plateMesh,
@@ -37,7 +38,7 @@ export const useTableModelSize = ({
   useFrame((_, delta) => {
     if (!leftLegMesh || !rightLegMesh || !plateMesh) return
 
-    t += delta * 0.15
+    t += delta * ANIMATION_SPEED
     t = Math.min(t, 1)
 
     plateMesh.scale.lerp(plateFinalScale, t)
