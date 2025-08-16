@@ -32,7 +32,6 @@ export const Table: React.FC<Props> = ({
     '/r3f-table-configurator/model/table.gltf',
   ) as unknown as GLTFResult
 
-  const metalMaterialRef = useRef(materials.Metal)
   const plateMeshRef = useRef<THREE.Mesh>(null)
   const leftLegMeshRef = useRef<THREE.Mesh>(null)
   const rightLegMeshRef = useRef<THREE.Mesh>(null)
@@ -44,7 +43,7 @@ export const Table: React.FC<Props> = ({
   })
 
   useEffect(() => {
-    metalMaterialRef.current.color.set(modelColor)
+    materials.Metal.color.set(modelColor)
   }, [modelColor])
 
   return (
