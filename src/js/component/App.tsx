@@ -8,7 +8,7 @@ import {
   RandomizedLight,
 } from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {
   TABLE_MODEL_COLOR,
   TABLE_MODEL_TYPE,
@@ -26,6 +26,19 @@ export const App = () => {
   const [tableModelColor, setTableModelColor] = useState<TableModelColor>(
     TABLE_MODEL_COLOR.BLACK.value,
   )
+  const [tableModelSize, setTableModelSize] = useState(1)
+  const [debouncedTableModelSize, setDebouncedTableModelSize] =
+    useState(tableModelSize)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedTableModelSize(tableModelSize)
+    }, 300)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [tableModelSize])
 
   return (
     <>
@@ -41,17 +54,23 @@ export const App = () => {
           opacity={0.4}
           position={[0, -1, 0]}
         >
-          <RandomizedLight radius={3} position={[2, 10, 4]} />
+          <RandomizedLight radius={10} position={[2, 10, 4]} />
         </AccumulativeShadows>
 
-        <Table modelType={tableModelType} modelColor={tableModelColor} />
+        <Table
+          modelType={tableModelType}
+          modelColor={tableModelColor}
+          modelSize={debouncedTableModelSize}
+        />
       </Canvas>
 
       <Menu
         tableModelType={tableModelType}
         tableModelColor={tableModelColor}
+        tableModelSize={tableModelSize}
         handleTableModelType={setTableModelType}
         handleTableModelColor={setTableModelColor}
+        handleTableModelSize={setTableModelSize}
       />
     </>
   )

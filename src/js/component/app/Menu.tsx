@@ -14,18 +14,22 @@ import {Option} from './menu/Option.tsx'
 interface Props {
   tableModelType: TableModelType
   tableModelColor: TableModelColor
+  tableModelSize: number
   handleTableModelType: (tableModelType: TableModelType) => void
   handleTableModelColor: (tableModelColor: TableModelColor) => void
+  handleTableModelSize: (tableModelSize: number) => void
 }
 
 export const Menu: React.FC<Props> = ({
   tableModelType,
   tableModelColor,
+  tableModelSize,
   handleTableModelType,
   handleTableModelColor,
+  handleTableModelSize,
 }) => {
   return (
-    <div className="fixed right-10 top-10 flex flex-col gap-4 p-8 text-sm rounded-2xl shadow-[black_0_0_1rem] text-secondary-600 bg-glass-100 backdrop-blur-lg hover:bg-glass-500 hover:text-secondary-900 transition-colors duration-500">
+    <div className="fixed right-10 top-10 flex flex-col gap-6 p-8 text-sm rounded-2xl shadow-[black_0_0_1rem] text-secondary-600 bg-glass-100 backdrop-blur-lg hover:bg-glass-500 hover:text-secondary-900 transition-colors duration-500">
       <div>
         <h3 className="font-black uppercase mb-3">Model</h3>
 
@@ -66,6 +70,25 @@ export const Menu: React.FC<Props> = ({
             )
           })}
         </ul>
+      </div>
+
+      <div>
+        <h3 className="font-black uppercase mb-3">Size</h3>
+
+        <div className="flex flex-row gap-1 items-center">
+          <input
+            type="range"
+            value={tableModelSize}
+            min={1}
+            max={3}
+            step={1}
+            id="table_model_size"
+            onChange={(e) => handleTableModelSize(Number(e.target.value))}
+          />
+          <label htmlFor="table_model_size" className="text-xs">
+            {tableModelSize}m
+          </label>
+        </div>
       </div>
     </div>
   )
